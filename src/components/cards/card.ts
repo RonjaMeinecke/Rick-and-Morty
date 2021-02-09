@@ -7,6 +7,7 @@ export function createCard({ imgSrc, name, status, species, origin }) {
       createElement("img", {
         className: "card__portrait",
         src: imgSrc,
+        alt: "",
       }),
       createElement("div", {
         className: "card__info",
@@ -16,7 +17,7 @@ export function createCard({ imgSrc, name, status, species, origin }) {
             innerText: name,
           }),
           createElement("p", {
-            innerText: `${status === "Alive" ? "🥳🎉" : "💀"} - ${status}`,
+            innerText: `${status === "Alive" ? "🎉" : "💀"} - ${status}`,
           }),
           createElement("p", {
             className: "info__species",
