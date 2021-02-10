@@ -94,6 +94,38 @@ CharactersFromAPI.loaders = [
   }),
 ];
 
+export const CharactersFromAPIWithFilter = (
+  args,
+  { loaded: { characters } }
+) => {
+  const input = createElement("input", {
+    onchange: async () => {
+      const newCharacters = await getCharacters(input.value);
+      const newCards = newCharacters.map((character) => createCard(character));
+      characterContainer.innerHTML = "";
+      characterContainer.append(...newCards);
+    },
+  });
+
+  const characterContainer = createElement("div", {
+    className: "container",
+    childs: characters.map((character) => createCard(character)),
+  });
+
+  const container = createElement("div", {
+    className: "",
+    childs: [input, characterContainer],
+  });
+
+  return container;
+};
+
+CharactersFromAPIWithFilter.loaders = [
+  async () => ({
+    characters: await getCharacters(),
+  }),
+];
+
 export const RandomCharacter = () => {
   const randomButton = createElement("button", {
     innerText: "Load random character",
